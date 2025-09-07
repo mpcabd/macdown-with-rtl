@@ -71,7 +71,7 @@ NS_INLINE NSSet *MPEditorPreferencesToObserve()
             @"editorHorizontalInset", @"editorVerticalInset",
             @"editorWidthLimited", @"editorMaximumWidth", @"editorLineSpacing",
             @"editorOnRight", @"editorStyleName", @"editorShowWordCount",
-            @"editorScrollsPastEnd", nil
+            @"editorScrollsPastEnd", @"editorTextDirection", nil
         ];
     });
     return keys;
@@ -347,6 +347,7 @@ static void (^MPGetPreviewLoadingCompletionHandler(MPDocument *doc))()
     self.isPreviewReady = NO;
     self.shouldHandleBoundsChange = YES;
     self.previousSplitRatio = -1.0;
+    self.preferences.editorTextDirection = NSWritingDirectionLeftToRight;
     
     return self;
 }
@@ -1041,6 +1042,11 @@ static void (^MPGetPreviewLoadingCompletionHandler(MPDocument *doc))()
     return self.preferences.htmlHighlightingThemeName;
 }
 
+- (NSInteger)rendererTextDirection:(MPRenderer *)renderer
+{
+    return self.preferences.editorTextDirection;
+}
+
 - (void)renderer:(MPRenderer *)renderer didProduceHTMLOutput:(NSString *)html
 {
     if (self.alreadyRenderingInWeb)
@@ -1488,6 +1494,42 @@ static void (^MPGetPreviewLoadingCompletionHandler(MPDocument *doc))()
     [self.renderer parseAndRenderLater];
 }
 
+- (IBAction)toggleTextDirection:(id)sender
+{
+    NSInteger currentDirection = self.preferences.editorTextDirection;
+    NSInteger newDirection;
+
+    // Toggle between LTR and RTL only (no Natural)
+    switch (currentDirection) {
+        case NSWritingDirectionNatural:
+        case NSWritingDirectionLeftToRight:
+            newDirection = NSWritingDirectionRightToLeft;
+            break;
+        case NSWritingDirectionRightToLeft:
+        default:
+            newDirection = NSWritingDirectionLeftToRight;
+            break;
+    }
+
+    self.preferences.editorTextDirection = newDirection;
+    [self setupEditor:@"editorTextDirection"];
+}
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    if (menuItem.action == @selector(toggleTextDirection:)) {
+        NSInteger currentDirection = self.preferences.editorTextDirection;
+        if (currentDirection == NSWritingDirectionRightToLeft) {
+            menuItem.title = NSLocalizedString(@"Switch to Left-to-Right", @"Menu item for switching to LTR text direction");
+        } else {
+            menuItem.title = NSLocalizedString(@"Switch to Right-to-Left", @"Menu item for switching to RTL text direction");
+        }
+        return YES;
+    }
+    // Let the default implementation handle other menu items
+    return [super validateMenuItem:menuItem];
+}
+
 
 #pragma mark - Private
 
@@ -1543,11 +1585,46 @@ static void (^MPGetPreviewLoadingCompletionHandler(MPDocument *doc))()
 
     if (!changedKey || [changedKey isEqualToString:@"editorBaseFontInfo"]
             || [changedKey isEqualToString:@"editorStyleName"]
-            || [changedKey isEqualToString:@"editorLineSpacing"])
+            || [changedKey isEqualToString:@"editorLineSpacing"]
+            || [changedKey isEqualToString:@"editorTextDirection"])
     {
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
         style.lineSpacing = self.preferences.editorLineSpacing;
+
+        // Set text direction and alignment
+        NSInteger textDirection = self.preferences.editorTextDirection;
+        switch (textDirection) {
+            case NSWritingDirectionLeftToRight:
+                style.baseWritingDirection = NSWritingDirectionLeftToRight;
+                style.alignment = NSTextAlignmentLeft;
+                break;
+            case NSWritingDirectionRightToLeft:
+                style.baseWritingDirection = NSWritingDirectionRightToLeft;
+                style.alignment = NSTextAlignmentRight;
+                break;
+            default: // Default to LTR for any other values
+                style.baseWritingDirection = NSWritingDirectionLeftToRight;
+                style.alignment = NSTextAlignmentLeft;
+                break;
+        }
+
         self.editor.defaultParagraphStyle = [style copy];
+
+        // Apply the paragraph style to existing text
+        if ([changedKey isEqualToString:@"editorTextDirection"]) {
+            NSRange fullRange = NSMakeRange(0, self.editor.string.length);
+            if (fullRange.length > 0) {
+                // Only update the paragraph style attribute, don't trigger full editor refresh
+                [self.editor.textStorage beginEditing];
+                [self.editor.textStorage addAttribute:NSParagraphStyleAttributeName
+                                                value:[style copy]
+                                                range:fullRange];
+                [self.editor.textStorage endEditing];
+            }
+            // For text direction changes, we don't need to update fonts, colors, or highlighter
+            return;
+        }
+
         NSFont *font = [self.preferences.editorBaseFont copy];
         if (font)
             self.editor.font = font;

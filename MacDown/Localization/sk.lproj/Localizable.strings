@@ -89,3 +89,12 @@
 /* (No Comment) */
 "WORDS_PLURAL_STRING" = "%@ slovo;%@ slov";
 
+/* Text Direction */
+"Text direction:" = "Smer textu:";
+"Natural" = "Prirodzený";
+"Left to Right" = "Zľava doprava";
+"Right to Left" = "Sprava doľava";
+"Toggle Text Direction" = "Prepnúť smer textu";
+"Switch to Left-to-Right" = "Prepnúť na zľava-doprava";
+"Switch to Right-to-Left" = "Prepnúť na sprava-doľava";
+

@@ -37,3 +37,12 @@
 /* (No Comment) */
 "WORDS_PLURAL_STRING" = "%@ ord;%@ ord";
 
+/* Text Direction */
+"Text direction:" = "Textriktning:";
+"Natural" = "Naturlig";
+"Left to Right" = "Vänster till höger";
+"Right to Left" = "Höger till vänster";
+"Toggle Text Direction" = "Växla textriktning";
+"Switch to Left-to-Right" = "Växla till vänster-till-höger";
+"Switch to Right-to-Left" = "Växla till höger-till-vänster";
+

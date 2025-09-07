@@ -80,3 +80,11 @@
 /* default filename if no title can be determined */
 "Untitled" = "제목없음";
 
+/* Text Direction */
+"Text direction:" = "텍스트 방향:";
+"Natural" = "자연스러운";
+"Left to Right" = "왼쪽에서 오른쪽";
+"Right to Left" = "오른쪽에서 왼쪽";
+"Toggle Text Direction" = "텍스트 방향 전환";
+"Switch to Left-to-Right" = "왼쪽-에서-오른쪽으로 전환";
+"Switch to Right-to-Left" = "오른쪽-에서-왼쪽으로 전환";

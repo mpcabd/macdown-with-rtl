@@ -110,3 +110,12 @@
 /* (No Comment) */
 "WORDS_PLURAL_STRING" = "%@ parola;%@ parole";
 
+/* Text Direction */
+"Text direction:" = "Direzione del testo:";
+"Natural" = "Naturale";
+"Left to Right" = "Da sinistra a destra";
+"Right to Left" = "Da destra a sinistra";
+"Toggle Text Direction" = "Commuta direzione del testo";
+"Switch to Left-to-Right" = "Passa a sinistra-a-destra";
+"Switch to Right-to-Left" = "Passa a destra-a-sinistra";
+

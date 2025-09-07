@@ -19,3 +19,11 @@
 /* Unordered list toolbar button */
 "Unordered List" = "Маркированный список";
 
+/* Text Direction */
+"Text direction:" = "Направление текста:";
+"Natural" = "Естественное";
+"Left to Right" = "Слева направо";
+"Right to Left" = "Справа налево";
+"Toggle Text Direction" = "Переключить направление текста";
+"Switch to Left-to-Right" = "Переключить на слева-направо";
+"Switch to Right-to-Left" = "Переключить на справа-налево";

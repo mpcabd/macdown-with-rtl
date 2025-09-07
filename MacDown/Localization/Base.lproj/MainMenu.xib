@@ -478,6 +478,12 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="kPi-GI-e6G"/>
+                            <menuItem title="Toggle Text Direction" keyEquivalent="r" id="txt-dir-menu">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <connections>
+                                    <action selector="toggleTextDirection:" target="-1" id="txt-dir-action"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Convert To" id="e8h-vX-NQb">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Convert To" id="I8Y-e8-XDx">

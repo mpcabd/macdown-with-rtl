@@ -140,3 +140,12 @@
 /* (No Comment) */
 "WORDS_PLURAL_STRING" = "%@ ord;%@ ord";
 
+/* Text Direction */
+"Text direction:" = "Tekstretning:";
+"Natural" = "Naturlig";
+"Left to Right" = "Venstre til høyre";
+"Right to Left" = "Høyre til venstre";
+"Toggle Text Direction" = "Bytt tekstretning";
+"Switch to Left-to-Right" = "Bytt til venstre-til-høyre";
+"Switch to Right-to-Left" = "Bytt til høyre-til-venstre";
+

@@ -13,3 +13,12 @@
 "CHARACTERS_PLURAL_STRING" = "%@ character;%@ characters";
 
 "CHARACTERS_NO_SPACES_PLURAL_STRING" = "%@ character (no spaces);%@ characters (no spaces)";
+
+/* Text Direction */
+"Text direction:" = "Text direction:";
+"Natural" = "Natural";
+"Left to Right" = "Left to Right";
+"Right to Left" = "Right to Left";
+"Toggle Text Direction" = "Toggle Text Direction";
+"Switch to Left-to-Right" = "Switch to Left-to-Right";
+"Switch to Right-to-Left" = "Switch to Right-to-Left";

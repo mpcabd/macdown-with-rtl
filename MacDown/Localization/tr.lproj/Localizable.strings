@@ -62,3 +62,12 @@
 /* (No Comment) */
 "WORDS_PLURAL_STRING" = "%@ kelime;%@ kelime";
 
+/* Text Direction */
+"Text direction:" = "Metin yönü:";
+"Natural" = "Doğal";
+"Left to Right" = "Soldan sağa";
+"Right to Left" = "Sağdan sola";
+"Toggle Text Direction" = "Metin yönünü değiştir";
+"Switch to Left-to-Right" = "Soldan-sağa geç";
+"Switch to Right-to-Left" = "Sağdan-sola geç";
+

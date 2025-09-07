@@ -62,3 +62,12 @@
 /* (No Comment) */
 "WORDS_PLURAL_STRING" = "%@ orð;%@ orð";
 
+/* Text Direction */
+"Text direction:" = "Stefna texta:";
+"Natural" = "Náttúruleg";
+"Left to Right" = "Vinstri til hægri";
+"Right to Left" = "Hægri til vinstri";
+"Toggle Text Direction" = "Skipta um stefnu texta";
+"Switch to Left-to-Right" = "Skipta yfir í vinstri-til-hægri";
+"Switch to Right-to-Left" = "Skipta yfir í hægri-til-vinstri";
+

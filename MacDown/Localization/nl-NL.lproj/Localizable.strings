@@ -140,3 +140,12 @@
 /* (No Comment) */
 "WORDS_PLURAL_STRING" = "%@ woord;%@ woorden";
 
+/* Text Direction */
+"Text direction:" = "Tekstrichting:";
+"Natural" = "Natuurlijk";
+"Left to Right" = "Links naar rechts";
+"Right to Left" = "Rechts naar links";
+"Toggle Text Direction" = "Tekstrichting omschakelen";
+"Switch to Left-to-Right" = "Omschakelen naar links-naar-rechts";
+"Switch to Right-to-Left" = "Omschakelen naar rechts-naar-links";
+

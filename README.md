@@ -1,4 +1,10 @@
 
+# MacDown with RTL support
+
+This is based on https://github.com/tikkal/macdown-arm64, I just added RTL support to it. Everything below is from that repo.
+
+---
+
 # MacDown
 This is a port of Macdown for Mac Silicon (arm64). The upstream repo is for x86 which Apple plans to sunset by 2026 or so.
 

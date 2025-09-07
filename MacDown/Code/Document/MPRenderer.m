@@ -146,7 +146,7 @@ NS_INLINE NSString *MPHTMLFromMarkdown(
 
 NS_INLINE NSString *MPGetHTML(
     NSString *title, NSString *body, NSArray *styles, MPAssetOption styleopt,
-    NSArray *scripts, MPAssetOption scriptopt)
+    NSArray *scripts, MPAssetOption scriptopt, NSInteger textDirection)
 {
     NSMutableArray *styleTags = [NSMutableArray array];
     NSMutableArray *scriptTags = [NSMutableArray array];
@@ -181,12 +181,19 @@ NS_INLINE NSString *MPGetHTML(
     if (title.length)
         titleTag = [NSString stringWithFormat:@"<title>%@</title>", title];
 
+    // Add RTL CSS if text direction is RTL
+    NSString *rtlCSS = @"";
+    if (textDirection == NSWritingDirectionRightToLeft) {
+        rtlCSS = @"<style>body { direction: rtl; text-align: right; }</style>";
+    }
+    
     NSDictionary *context = @{
         @"title": title ? title : @"",
         @"titleTag": titleTag ? titleTag : @"",
         @"styleTags": styleTags ? styleTags : @[],
         @"body": body ? body : @"",
         @"scriptTags": scriptTags ? scriptTags : @[],
+        @"rtlCSS": rtlCSS,
     };
     NSString *html = [HBHandlebars renderTemplateString:f withContext:context
                                                   error:NULL];
@@ -226,6 +233,7 @@ NS_INLINE BOOL MPAreNilableStringsEqual(NSString *s1, NSString *s2)
 @property BOOL lineNumbers;
 @property BOOL manualRender;
 @property (copy) NSString *highlightingThemeName;
+@property NSInteger textDirection;
 
 @end
 
@@ -634,6 +642,8 @@ NS_INLINE void MPFreeHTMLRenderer(hoedown_renderer *htmlRenderer)
         changed = YES;
     else if ([d rendererCodeBlockAccesory:self] != self.codeBlockAccesory)
         changed = YES;
+    else if ([d rendererTextDirection:self] != self.textDirection)
+        changed = YES;
 
     if (changed)
         [self render];
@@ -646,7 +656,7 @@ NS_INLINE void MPFreeHTMLRenderer(hoedown_renderer *htmlRenderer)
     NSString *title = [self.dataSource rendererHTMLTitle:self];
     NSString *html = MPGetHTML(
         title, self.currentHtml, self.stylesheets, MPAssetFullLink,
-        self.scripts, MPAssetFullLink);
+        self.scripts, MPAssetFullLink, [delegate rendererTextDirection:self]);
     [delegate renderer:self didProduceHTMLOutput:html];
 
     self.styleName = [delegate rendererStyleName:self];
@@ -655,6 +665,7 @@ NS_INLINE void MPFreeHTMLRenderer(hoedown_renderer *htmlRenderer)
     self.graphviz = [delegate rendererHasGraphviz:self];
     self.highlightingThemeName = [delegate rendererHighlightingThemeName:self];
     self.codeBlockAccesory = [delegate rendererCodeBlockAccesory:self];
+    self.textDirection = [delegate rendererTextDirection:self];
 }
 
 - (NSString *)HTMLForExportWithStyles:(BOOL)withStyles
@@ -697,7 +708,7 @@ NS_INLINE void MPFreeHTMLRenderer(hoedown_renderer *htmlRenderer)
     if (!title)
         title = @"";
     NSString *html = MPGetHTML(
-        title, self.currentHtml, styles, stylesOption, scripts, scriptsOption);
+        title, self.currentHtml, styles, stylesOption, scripts, scriptsOption, [self.delegate rendererTextDirection:self]);
     return html;
 }
 

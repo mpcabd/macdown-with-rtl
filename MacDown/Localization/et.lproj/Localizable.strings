@@ -110,3 +110,12 @@
 /* (No Comment) */
 "WORDS_PLURAL_STRING" = "%@ sõna;%@ sõna";
 
+/* Text Direction */
+"Text direction:" = "Teksti suund:";
+"Natural" = "Loomulik";
+"Left to Right" = "Vasakult paremale";
+"Right to Left" = "Paremalt vasakule";
+"Toggle Text Direction" = "Lülita teksti suunda";
+"Switch to Left-to-Right" = "Lülitu vasakult-paremale";
+"Switch to Right-to-Left" = "Lülitu paremalt-vasakule";
+

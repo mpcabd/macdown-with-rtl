@@ -140,3 +140,12 @@
 /* (No Comment) */
 "WORDS_PLURAL_STRING" = "%@ 个词;%@ 个词";
 
+/* Text Direction */
+"Text direction:" = "文本方向:";
+"Natural" = "自然";
+"Left to Right" = "从左到右";
+"Right to Left" = "从右到左";
+"Toggle Text Direction" = "切换文本方向";
+"Switch to Left-to-Right" = "切换到从左到右";
+"Switch to Right-to-Left" = "切换到从右到左";
+

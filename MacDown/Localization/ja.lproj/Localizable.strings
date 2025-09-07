@@ -140,3 +140,12 @@
 /* (No Comment) */
 "WORDS_PLURAL_STRING" = "%@ word;%@ words";
 
+/* Text Direction */
+"Text direction:" = "テキストの方向:";
+"Natural" = "自然";
+"Left to Right" = "左から右";
+"Right to Left" = "右から左";
+"Toggle Text Direction" = "テキストの方向を切り替え";
+"Switch to Left-to-Right" = "左から右に切り替え";
+"Switch to Right-to-Left" = "右から左に切り替え";
+
