@@ -200,6 +200,7 @@ typedef NS_ENUM(NSUInteger, MPWordCountType) {
 @property BOOL printing;
 @property BOOL shouldHandleBoundsChange;
 @property BOOL isPreviewReady;
+@property NSInteger editorTextDirection;
 @property (strong) NSURL *currentBaseUrl;
 @property CGFloat lastPreviewScrollTop;
 @property (nonatomic, readonly) BOOL needsHtml;
@@ -347,7 +348,7 @@ static void (^MPGetPreviewLoadingCompletionHandler(MPDocument *doc))()
     self.isPreviewReady = NO;
     self.shouldHandleBoundsChange = YES;
     self.previousSplitRatio = -1.0;
-    self.preferences.editorTextDirection = NSWritingDirectionLeftToRight;
+    self.editorTextDirection = NSWritingDirectionLeftToRight;
     
     return self;
 }
@@ -1044,7 +1045,7 @@ static void (^MPGetPreviewLoadingCompletionHandler(MPDocument *doc))()
 
 - (NSInteger)rendererTextDirection:(MPRenderer *)renderer
 {
-    return self.preferences.editorTextDirection;
+    return self.editorTextDirection;
 }
 
 - (void)renderer:(MPRenderer *)renderer didProduceHTMLOutput:(NSString *)html
@@ -1496,7 +1497,7 @@ static void (^MPGetPreviewLoadingCompletionHandler(MPDocument *doc))()
 
 - (IBAction)toggleTextDirection:(id)sender
 {
-    NSInteger currentDirection = self.preferences.editorTextDirection;
+    NSInteger currentDirection = self.editorTextDirection;
     NSInteger newDirection;
 
     // Toggle between LTR and RTL only
@@ -1510,14 +1511,14 @@ static void (^MPGetPreviewLoadingCompletionHandler(MPDocument *doc))()
             break;
     }
 
-    self.preferences.editorTextDirection = newDirection;
+    self.editorTextDirection = newDirection;
     [self setupEditor:@"editorTextDirection"];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
     if (menuItem.action == @selector(toggleTextDirection:)) {
-        NSInteger currentDirection = self.preferences.editorTextDirection;
+        NSInteger currentDirection = self.editorTextDirection;
         if (currentDirection == NSWritingDirectionRightToLeft) {
             menuItem.title = NSLocalizedString(@"Switch to Left-to-Right", @"Menu item for switching to LTR text direction");
         } else {
@@ -1591,7 +1592,7 @@ static void (^MPGetPreviewLoadingCompletionHandler(MPDocument *doc))()
         style.lineSpacing = self.preferences.editorLineSpacing;
 
         // Set text direction and alignment
-        NSInteger textDirection = self.preferences.editorTextDirection;
+        NSInteger textDirection = self.editorTextDirection;
         switch (textDirection) {
             case NSWritingDirectionRightToLeft:
                 style.baseWritingDirection = NSWritingDirectionRightToLeft;
