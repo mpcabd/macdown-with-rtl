@@ -3,6 +3,8 @@
 
 This is based on https://github.com/tikkal/macdown-arm64, I just added RTL support to it. Everything below is from that repo.
 
+Download it from [here](https://github.com/mpcabd/macdown-with-rtl/releases/tag/v0.8.0d32)
+
 ---
 
 # MacDown
