@@ -1499,9 +1499,8 @@ static void (^MPGetPreviewLoadingCompletionHandler(MPDocument *doc))()
     NSInteger currentDirection = self.preferences.editorTextDirection;
     NSInteger newDirection;
 
-    // Toggle between LTR and RTL only (no Natural)
+    // Toggle between LTR and RTL only
     switch (currentDirection) {
-        case NSWritingDirectionNatural:
         case NSWritingDirectionLeftToRight:
             newDirection = NSWritingDirectionRightToLeft;
             break;
@@ -1594,14 +1593,11 @@ static void (^MPGetPreviewLoadingCompletionHandler(MPDocument *doc))()
         // Set text direction and alignment
         NSInteger textDirection = self.preferences.editorTextDirection;
         switch (textDirection) {
-            case NSWritingDirectionLeftToRight:
-                style.baseWritingDirection = NSWritingDirectionLeftToRight;
-                style.alignment = NSTextAlignmentLeft;
-                break;
             case NSWritingDirectionRightToLeft:
                 style.baseWritingDirection = NSWritingDirectionRightToLeft;
                 style.alignment = NSTextAlignmentRight;
                 break;
+            case NSWritingDirectionLeftToRight:
             default: // Default to LTR for any other values
                 style.baseWritingDirection = NSWritingDirectionLeftToRight;
                 style.alignment = NSTextAlignmentLeft;
