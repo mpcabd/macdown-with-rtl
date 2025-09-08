@@ -1513,6 +1513,7 @@ static void (^MPGetPreviewLoadingCompletionHandler(MPDocument *doc))()
 
     self.editorTextDirection = newDirection;
     [self setupEditor:@"editorTextDirection"];
+    [self.renderer parseAndRenderLater];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
